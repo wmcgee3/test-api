@@ -1,3 +1,5 @@
+"""Endpoints for the API."""
+
 import json
 import secrets
 
@@ -10,6 +12,8 @@ api = flask.Blueprint('api', __name__)
 
 @api.route('/<app_name>', methods=['GET', 'POST'])
 def home(app_name):
+    """Home route of API."""
+
     response = None
 
     if flask.request.method == 'GET':
@@ -32,10 +36,10 @@ def home(app_name):
                 name=app_name,
                 api_key=api_key
             )
-            db.session.add(app)
+            db.session.add(app) # pylint: disable=no-member
         else:
             app.api_key = api_key
-        db.session.commit()
+        db.session.commit() # pylint: disable=no-member
         response = json.loads(str(app))
 
     return response
