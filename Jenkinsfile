@@ -46,6 +46,7 @@ pipeline {
             }
 
             steps {
+                sh 'rm test_api/test.db'
                 sh 'env/bin/python init_db.py'
             }
 
