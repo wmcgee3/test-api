@@ -1,3 +1,5 @@
+"""Creates the database and tables."""
+
 from test_api import create_app
 from test_api.models import db
 
