@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh python3 -m venv env
+                sh 'python3 -m venv env'
             }
         }
         stage('Install dependencies') {
@@ -19,7 +19,7 @@ pipeline {
                 }
             }
             steps {
-                sh env/bin/python -m pip install -r requirements.txt
+                sh 'env/bin/python -m pip install -r requirements.txt'
             }
         }
         stage('Linting') {
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
             steps {
-                sh env/bin/python -m pylint test_api
+                sh 'env/bin/python -m pylint test_api'
             }
         }
     }
