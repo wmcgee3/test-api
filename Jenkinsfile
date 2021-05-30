@@ -7,6 +7,14 @@ pipeline {
 
         stage('Create virtual environment') {
 
+            when {
+                expression {
+                    (env.BRANCH_NAME.startsWith('PR-') && env.CHANGE_TARGET == 'dev') || (
+                        env.BRANCH_NAME == 'prod'
+                    )
+                }
+            }
+
             steps {
                 sh 'python3 -m venv env'
             }
@@ -14,6 +22,12 @@ pipeline {
         }
 
         stage('Install dependencies') {
+
+            when {
+                expression {
+                    (env.BRANCH_NAME.startsWith('PR-') && env.CHANGE_TARGET == 'dev') || env.BRANCH_NAME == 'prod'
+                }
+            }
 
             steps {
                 sh 'env/bin/python -m pip install -r requirements.txt'
@@ -26,7 +40,7 @@ pipeline {
 
             when {
                 expression {
-                    env.BRANCH_NAME.startsWith('PR-')
+                    (env.BRANCH_NAME.startsWith('PR-') && env.CHANGE_TARGET == 'dev')
                 }
             }
 
