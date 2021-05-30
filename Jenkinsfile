@@ -5,7 +5,7 @@ pipeline {
         stage('Create virtual environment') {
             when {
                 expression {
-                    branch == 'PR-*'
+                    env.BRANCH_NAME.startsWith('PR-')
                 }
             }
             steps {
@@ -15,7 +15,7 @@ pipeline {
         stage('Install dependencies') {
             when {
                 expression {
-                    branch == 'PR-*'
+                    env.BRANCH_NAME.startsWith('PR-')
                 }
             }
             steps {
@@ -25,7 +25,7 @@ pipeline {
         stage('Linting') {
             when {
                 expression {
-                    branch == 'PR-*'
+                    env.BRANCH_NAME.startsWith('PR-')
                 }
             }
             steps {
