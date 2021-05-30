@@ -37,6 +37,20 @@ pipeline {
         }
 
         // prod only
+        stage('Create database.') {
+
+            when {
+                expression {
+                    env.BRANCH_NAME == 'prod'
+                }
+            }
+
+            steps {
+                sh 'env/bin/python init_db.py'
+            }
+
+        }
+
         stage('Restart web server.') {
 
             when {
