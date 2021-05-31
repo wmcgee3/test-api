@@ -22,6 +22,7 @@ pipeline {
 
             steps {
 
+                sh 'env/bin/python -m pip install wheel'
                 sh 'env/bin/python -m pip install -r requirements.txt'
 
             }
