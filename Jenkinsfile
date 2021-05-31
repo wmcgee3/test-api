@@ -1,17 +1,43 @@
 pipeline {
+
     agent {
+
         label 'master'
+
     }
 
     stages {
 
-        stage('Print branch name.') {
+        stage('Create virtual environment.') {
 
             steps {
-                echo env.BRANCH_NAME
+
+                sh 'python3 -m venv env'
+
+            }
+
+        }
+
+        stage('Install dependencies.') {
+
+            steps {
+
+                sh 'env/bin/python -m pip install -r requirements.txt'
+
+            }
+
+        }
+
+        stage('Run Pylint checks.') {
+
+            steps {
+
+                sh 'env/bin/python -m pylint test_api'
+
             }
 
         }
 
     }
+
 }
