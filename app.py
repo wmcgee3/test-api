@@ -1,4 +1,4 @@
-"""Runs the development web server."""
+"""Runs the production web server."""
 
 import waitress
 
